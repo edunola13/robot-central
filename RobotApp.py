@@ -1,16 +1,27 @@
 # -*- coding: utf-8 -*-
-from DeviceDrivers.SensorDriver import SensorDriver
+import logging
+
 from RobotConfig import RobotConfig
 from Threads.ActualizeThread import ActualizeThread
+from SocketServer.Server import SocketServerThread
 
 class RobotApp:
 
-    def start(self):        
-        self.robotConfig = RobotConfig()
+    def start(self):
+        self.logger = logging.getLogger(__name__)
+        self.robotConfig = RobotConfig()        
 
-        thread = ActualizeThread(self.robotConfig)
-        thread.run()
+        #PARA PRUEBAS EN WINDOWS SIN THREADS
+        #thread = ActualizeThread(self.robotConfig)
+        #thread.run()
+        self._startActualizeThread()
 
-    #def startActualizeThread(self):
-    #    newthread = ActualizeThread(self.config)
-    #    newthread.start()
+        self._startSocketServer()
+
+    def _startActualizeThread(self):
+        newthread = ActualizeThread(self.robotConfig)
+        newthread.start()
+
+    def _startSocketServer(self):
+        newthread = SocketServerThread(self.robotConfig)
+        newthread.start()

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import configparser
 import ast
+import logging
+
 
 class RobotConfig:
 
@@ -17,3 +19,6 @@ class RobotConfig:
 
     def get_section(self, section):
         return self.config[section]
+
+    def exists_section(self, section):
+        return section in self.config

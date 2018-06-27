@@ -21,4 +21,12 @@ class SensorDriver:
             self.actualize_sensor(self.sensors[key])
 
     def actualize_sensor(self, sensor):
-        self.i2c.readBytes(int(sensor['cmdI2c']))
+        #Leemos y actualizamos en algun lugar
+        self.get_sensor_data(sensor)
+        #GUARDAR
+
+    def get_sensor_data(self, sensor):
+        return self.i2c.readBytes(int(sensor['cmdI2c']))
+
+    def get_sensor_data_by_key(self, key):
+        return self.i2c.readBytes(int(self.sensors[key]['cmdI2c']))
