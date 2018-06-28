@@ -9,7 +9,7 @@ if sys.platform == 'win32':
     from signal import signal, SIGTERM
 else:
     from signal import signal, SIGTERM, SIGHUP, SIGQUIT, SIGKILL
-    signal(SIGPIPE,SIG_DFL)
+    #signal(SIGPIPE,SIG_DFL)
 
 from RobotApp import RobotApp
 
@@ -22,13 +22,14 @@ logger = logging.getLogger('service')
 #
 def handler(signum=None, frame=None):
     quit()
-
+"""
 if sys.platform == 'win32':
     for sig in [SIGTERM]:
         signal(sig, handler)
 else:
     for sig in [SIGTERM, SIGHUP, SIGQUIT, SIGKILL]:
         signal(sig, handler)
+"""
 
 if __name__ == "__main__":
     logger.info("Starting Service")

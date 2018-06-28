@@ -14,6 +14,7 @@ class RobotApp:
         #PARA PRUEBAS EN WINDOWS SIN THREADS
         #thread = ActualizeThread(self.robotConfig)
         #thread.run()
+        
         self._startActualizeThread()
 
         self._startSocketServer()
