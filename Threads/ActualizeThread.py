@@ -6,7 +6,6 @@ import time
 from DeviceDrivers.SensorDriver import SensorDriver
 
 class ActualizeThread(threading.Thread):
-#class ActualizeThread():
     def __init__(self, robotConfig):
         threading.Thread.__init__(self)
         self.robotConfig = robotConfig
