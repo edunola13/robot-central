@@ -36,16 +36,25 @@ class SocketClientThread(threading.Thread):
         msg = ''
         controller = None
         while True:
-            #Controlamos timeout. 2 formas. Ver cual funciona mejor
-            #Forma con select:
+            #Controlamos timeout. 2 formas.
+            #-Forma con select:
             #mysocket.setblocking(0)
             #ready = select.select([mysocket], [], [], timeout_in_seconds)
             #if ready[0]:
             #    data = mysocket.recv(4096)
-            #Forma con timeout:
+            #-Forma con timeout (Esta funciona bien, levanta Exception):
             self.csocket.settimeout(10.0)
-            data = self.csocket.recv(2048)
-            msg = data.decode().strip("\n")
+            try:                
+                data = self.csocket.recv(2048)
+            except Exception as e:
+                break
+            
+            print (data)
+            try:
+                msg = data.decode("utf-8").strip("\n")
+            except:
+                msg = "nada"
+                print("ErrorData")
             print ("Atendiendo")
 
             if msg == 'exit' or msg == '':
